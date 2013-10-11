@@ -14,9 +14,7 @@ For details of oll, see: http://code.google.com/p/oll
 
 ## Installation
 ```
-  $ git clone https://github.com/ikegami-yukino/oll-python.git
-  $ cd oll-python
-  $ sudo python setup.py build install
+  $ pip install git+https://github.com/ikegami-yukino/oll-python.git
 ```
  oll library is bundled, so you don't need to install it separately.
 
