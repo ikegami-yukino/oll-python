@@ -1,8 +1,8 @@
 oll-python
 ==========
-This is a Python binding of oll, which is a library for machine learning.
+This is a Python binding of the OLL library for machine learning.
 
-Currently, Oll 0.03 supports following algorithms:
+Currently, OLL 0.03 supports following algorithms:
 
 - Perceptron
 - Averaged Perceptron
@@ -12,24 +12,35 @@ Currently, Oll 0.03 supports following algorithms:
 
 For details of oll, see: http://code.google.com/p/oll
 
-## Installation
-```
-  $ pip install git+https://github.com/ikegami-yukino/oll-python.git
-```
- oll library is bundled, so you don't need to install it separately.
+Installation
+------------
 
-## Usage
-```
-  import oll
-  o = oll.oll("CW")
-  o.add({0: 1.0, 1: 2.0, 2: -1.0}, 1)
-  o.classify({0:1.0, 1:1.0}), 6)
-  o.save('oll.model')
-  o.load('oll.model')
-```
-## Note
+::
+
+ $ pip install oll
+
+OLL library is bundled, so you don't need to install it separately.
+
+Usage
+-----
+
+::
+
+ >>> import oll
+ >>> o = oll.oll("CW")
+ >>> o.add({0: 1.0, 1: 2.0, 2: -1.0}, 1) # train
+ >>> o.classify({0:1.0, 1:1.0}) # predict
+ >>> o.save('oll.model')
+ >>> o.load('oll.model')
+
+
+Note
+----
+- This module requires C++ compiler to build.
 - oll.cpp & oll.hpp : Copyright (c) 2011, Daisuke Okanohara
-- oll_swig_wrap.cxx is generated based on [oll-ruby](https://github.com/syou6162/oll-ruby)'s oll_swig.i
+- oll_swig_wrap.cxx is generated based on 'oll_swig.i' in oll-ruby (https://github.com/syou6162/oll-ruby)
 
-## License
+License
+-------
 New BSD License.
+
