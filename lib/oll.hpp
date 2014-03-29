@@ -24,6 +24,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 
 namespace oll_tool{  
   typedef std::vector<std::pair<int, float> > fv_t; // feature vector
