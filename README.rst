@@ -1,5 +1,11 @@
 oll-python
 ==========
+.. image:: https://badge.fury.io/py/oll.png
+    :target: http://badge.fury.io/py/oll
+.. image:: https://travis-ci.org/ikegami-yukino/oll-python.svg?branch=master
+    :target: https://travis-ci.org/ikegami-yukino/oll-python
+
+
 This is a Python binding of the OLL library for machine learning.
 
 Currently, OLL 0.03 supports following algorithms:
@@ -28,8 +34,8 @@ Usage
 
  >>> import oll
  >>> o = oll.oll("CW")
- >>> o.add({0: 1.0, 1: 2.0, 2: -1.0}, 1) # train
- >>> o.classify({0:1.0, 1:1.0}) # predict
+ >>> o.add({0: 1.0, 1: 2.0, 2: -1.0}, 1)  # train
+ >>> o.classify({0:1.0, 1:1.0})  # predict
  >>> o.save('oll.model')
  >>> o.load('oll.model')
 
