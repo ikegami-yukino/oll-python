@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
-from setuptools import setup, Extension, find_packages
+import os
+import re
+from setuptools import setup, Extension
+
+
+with open(os.path.join('oll', '__init__.py'), 'r') as f:
+    version = re.compile(
+        r'.*__version__ = "(.*?)"', re.S).match(f.read()).group(1)
 
 oll_module = Extension('_oll',
                            sources=['lib/oll.cpp', 'oll_swig_wrap.cxx'],
@@ -9,7 +16,7 @@ oll_module = Extension('_oll',
                            )
 
 setup (name = 'oll',
-        version = '0.1.1',
+        version=version,
         author      = "Yukino Ikegami",
         author_email='yukino0131@me.com',
         url='https://github.com/ikegami-yukino/madoka-python',
@@ -18,7 +25,7 @@ setup (name = 'oll',
         ext_modules = [oll_module],
         py_modules = ["oll"],
         headers=['lib/oll.hpp'],
-        packages=find_packages(exclude=['test']),
+        packages=['oll'],
         classifiers=[
             'Development Status :: 3 - Alpha',
             'Intended Audience :: Developers',
