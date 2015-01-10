@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-from nose.tools import ok_, eq_, raises
-import oll
 import os
+import tempfile
+from nose.tools import ok_, eq_, assert_raises, assert_almost_equals
+import oll
 
 
 class Test_oll(object):
 
     def __init__(self):
         self.oll = oll.oll('PA1')
-        self.oll.add({0: 1.0, 1: 2.0, 2: -1.0}, 1)
-        self.oll.add({0: -0.5, 1: 1.0, 2: -0.5}, -1)
 
     def test__init__(self):
         def _validate_methods(methods):
@@ -18,32 +17,33 @@ class Test_oll(object):
         methods = ('P', 'AP', 'PA', 'PA1', 'PA2', 'PAK', 'CW', 'AL')
         eq_(None, _validate_methods(methods))
 
-    @raises(KeyError)
     def test_invalid__init__(self):
-        def _validate_methods(methods):
-            for method in methods:
-                oll.oll(method)
-        invalid_methods = ('AWP', 'PY', 0)
-        _validate_methods(invalid_methods)
+        for method_name in ('AWP', 'PY'):
+            assert_raises(KeyError, oll.oll, method_name)
+        assert_raises(AssertionError, oll.oll, 0)
 
     def test_add(self):
-        self.oll.add({1.5: 1.0}, 1)
-        self.oll.add({-1.5: 1.0}, -1)
-        self.oll.add({10: 1.0}, 3)
-        self.oll.add({10: 1.0}, 0)
-        self.oll.add({10: 1.0}, -3)
+        for val in (({1.5: 1.0}, 1), ({-1.5: 1.0}, -1)):
+            assert_raises(NotImplementedError, self.oll.add, *val)
+        for val in (({10: 1.0}, 3), ({10: 1.0}, 0), ({10: 1.0}, -3)):
+            assert_raises(ValueError, self.oll.add, *val)
 
     def test_classify(self):
-        eq_(0.171429, round(self.oll.classify({0: 1.0, 1: 1.0}), 6))
+        self.oll.add({0: 1.0, 1: 2.0, 2: -1.0}, 1)
+        self.oll.add({0: -0.5, 1: 1.0, 2: -0.5}, -1)
+        assert_almost_equals(self.oll.classify({0: 1.0, 1: 1.0}), 0.171429, 6)
 
     def test_save_and_load(self):
         try:
-            filename = "tmp.model"
+            self.oll = oll.oll('PA1')
+            self.oll.add({1: 1.0}, 1)
+            filename = tempfile.mkstemp()[1]
             self.oll.save(filename)
             ok_(os.path.exists(filename))
+
             self.oll = oll.oll('PA1')
             self.oll.load(filename)
-            self.test_classify()
+            assert_almost_equals(self.oll.classify({0: 1.0, 1: 1.0}), 0.5, 6)
         finally:
             os.remove(filename)
 

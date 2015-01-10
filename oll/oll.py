@@ -481,7 +481,7 @@ class oll(_object):
     def trainExampleAL(self, *args): return _oll.oll_trainExampleAL(self, *args)
     def add(self, fv_dict, y):
         if y != 1 and y != -1:
-            raise ValueError('"y" should be 1 or -1')
+            raise ValueError('y is not +1 nor -1')
         fv = FeatureVector()
         for (_id, value) in fv_dict.items():
             fv.push_back(IntFloatPair(_id, value))
