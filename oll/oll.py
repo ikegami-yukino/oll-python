@@ -411,7 +411,12 @@ class oll(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, oll, name)
     __repr__ = _swig_repr
+
     def __init__(self, method): 
+        """
+        Arg:
+            <str> method: learning method
+        """
         this = _oll.new_oll()
         try: self.this.append(this)
         except: self.this = this
@@ -441,14 +446,41 @@ class oll(_object):
 
     __swig_destroy__ = _oll.delete_oll
     __del__ = lambda self : None;
-    def save(self, *args): return _oll.oll_save(self, *args)
-    def load(self, *args): return _oll.oll_load(self, *args)
+
+    def save(self, *args):
+        """
+        Arg:
+            <str> filename
+        """
+        return _oll.oll_save(self, *args)
+
+    def load(self, *args):
+        """
+        Arg:
+            <str> filename
+        """
+        return _oll.oll_load(self, *args)
+
     def classify(self, fv_dict):
+        """
+        Arg:
+            <dict <int>, <float>> fv_dict: feature vector
+        Return:
+            <float> result
+        """
         fv = FeatureVector()
         for (_id, value) in fv_dict.items():
             fv.push_back(IntFloatPair(_id, value))
         return _oll.oll_classify(self, fv)
-    def testFile(self, testfile, verb):
+
+    def testFile(self, testfile, verb=0):
+        """
+        Args:
+            <str> testfile
+            <int> verb
+        Return:
+            <dict <str>, <float>> confusion_matrix
+        """
         conf_mat_vec = IntVector()
         _oll.oll_testFile(self, testfile, conf_mat_vec, verb)
         conf_mat_vec = [i for i in conf_mat_vec]
@@ -461,15 +493,34 @@ class oll(_object):
             'false-positive': conf_mat_vec[2],
             'true-negative': conf_mat_vec[3]
         }
-    def setC(self, *args): return _oll.oll_setC(self, *args)
-    def setBias(self, *args): return _oll.oll_setBias(self, *args)
+
+    def setC(self, *args):
+        """
+        Arg:
+            <float> C
+        """
+        return _oll.oll_setC(self, *args)
+
+    def setBias(self, *args):
+        """
+        Arg:
+            <float> bias
+        """
+        return _oll.oll_setBias(self, *args)
+
     def add(self, fv_dict, y):
+        """
+        Args:
+            <dict <int>, <float>> fv_dict: feature vector
+            <float> y
+        """
         if y != 1 and y != -1:
             raise ValueError('y is not +1 nor -1')
         fv = FeatureVector()
         for (_id, value) in fv_dict.items():
             fv.push_back(IntFloatPair(_id, value))
         self.train_method(self.method, fv, y)
+
 oll_swigregister = _oll.oll_swigregister
 oll_swigregister(oll)
 
