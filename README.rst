@@ -4,6 +4,9 @@ oll-python
     :target: http://badge.fury.io/py/oll
 .. image:: https://travis-ci.org/ikegami-yukino/oll-python.svg?branch=master
     :target: https://travis-ci.org/ikegami-yukino/oll-python
+.. image:: https://coveralls.io/repos/ikegami-yukino/oll-python/badge.png?branch=master
+    :target: https://coveralls.io/r/ikegami-yukino/oll-python?branch=master
+
 
 
 This is a Python binding of the OLL library for machine learning.
