@@ -21,7 +21,7 @@ setup(
     version=version,
     author="Yukino Ikegami",
     author_email='yukino0131@me.com',
-    url='https://github.com/ikegami-yukino/madoka-python',
+    url='https://github.com/ikegami-yukino/oll-python',
     description="Online machine learning algorithms library (wrapper for OLL C++ library)",
     long_description=open('README.rst').read() + "\n\n" + open('CHANGES.rst').read(),
     ext_modules=[oll_module],
