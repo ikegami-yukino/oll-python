@@ -11,11 +11,8 @@ class Test_oll(object):
         self.oll = oll.oll('PA1')
 
     def test__init__(self):
-        def _validate_methods(methods):
-            for method in methods:
-                oll.oll(method)
-        methods = ('P', 'AP', 'PA', 'PA1', 'PA2', 'PAK', 'CW', 'AL')
-        eq_(None, _validate_methods(methods))
+        for method in ('P', 'AP', 'PA', 'PA1', 'PA2', 'PAK', 'CW', 'AL'):
+            ok_(oll.oll(method))
 
     def test_invalid__init__(self):
         for method_name in ('AWP', 'PY'):
