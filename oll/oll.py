@@ -427,18 +427,17 @@ class oll(_object):
             "AL": AL_s
         }
         train_methods = {
-            "P": self.trainExampleP,
-            "AP": self.trainExampleAP,
-            "PA": self.trainExamplePA,
-            "PA1": self.trainExamplePA1,
-            "PA2": self.trainExamplePA2,
-            "PAK": self.trainExamplePAK,
-            "CW": self.trainExampleCW,
-            "AL": self.trainExampleAL
+            "P": lambda *args: _oll.oll_trainExampleP(self, *args),
+            "AP": lambda *args: _oll.oll_trainExampleAP(self, *args),
+            "PA": lambda *args: _oll.oll_trainExamplePA(self, *args),
+            "PA1": lambda *args: _oll.oll_trainExamplePA1(self, *args),
+            "PA2": lambda *args: _oll.oll_trainExamplePA2(self, *args),
+            "PAK": lambda *args: _oll.oll_trainExamplePAK(self, *args),
+            "CW": lambda *args: _oll.oll_trainExampleCW(self, *args),
+            "AL": lambda *args: _oll.oll_trainExampleAL(self, *args)
         }
         self.method = methods[method.upper()]()
         self.train_method = train_methods[method]
-        self.method_name = method
 
     __swig_destroy__ = _oll.delete_oll
     __del__ = lambda self : None;
@@ -449,10 +448,6 @@ class oll(_object):
         for (_id, value) in fv_dict.items():
             fv.push_back(IntFloatPair(_id, value))
         return _oll.oll_classify(self, fv)
-    def getMargin(self, *args): return _oll.oll_getMargin(self, *args)
-    def getMarginK(self, *args): return _oll.oll_getMarginK(self, *args)
-    def getVariance(self, *args): return _oll.oll_getVariance(self, *args)
-    def getNorm(self, *args): return _oll.oll_getNorm(self, *args)
     def testFile(self, testfile, verb):
         conf_mat_vec = IntVector()
         _oll.oll_testFile(self, testfile, conf_mat_vec, verb)
@@ -466,19 +461,8 @@ class oll(_object):
             'false-positive': conf_mat_vec[2],
             'true-negative': conf_mat_vec[3]
         }
-    def parseLine(self, *args): return _oll.oll_parseLine(self, *args)
     def setC(self, *args): return _oll.oll_setC(self, *args)
     def setBias(self, *args): return _oll.oll_setBias(self, *args)
-    def getErrorLog(self): return _oll.oll_getErrorLog(self)
-    def getResultLog(self): return _oll.oll_getResultLog(self)
-    def trainExampleP(self, *args): return _oll.oll_trainExampleP(self, *args)
-    def trainExampleAP(self, *args): return _oll.oll_trainExampleAP(self, *args)
-    def trainExamplePA(self, *args): return _oll.oll_trainExamplePA(self, *args)
-    def trainExamplePA1(self, *args): return _oll.oll_trainExamplePA1(self, *args)
-    def trainExamplePA2(self, *args): return _oll.oll_trainExamplePA2(self, *args)
-    def trainExamplePAK(self, *args): return _oll.oll_trainExamplePAK(self, *args)
-    def trainExampleCW(self, *args): return _oll.oll_trainExampleCW(self, *args)
-    def trainExampleAL(self, *args): return _oll.oll_trainExampleAL(self, *args)
     def add(self, fv_dict, y):
         if y != 1 and y != -1:
             raise ValueError('y is not +1 nor -1')
