@@ -5,7 +5,6 @@
 # the SWIG interface file instead.
 
 
-
 from sys import version_info
 if version_info >= (2,6,0):
     def swig_import_helper():
@@ -416,6 +415,7 @@ class oll(_object):
         this = _oll.new_oll()
         try: self.this.append(this)
         except: self.this = this
+        assert isinstance(method, str)
         methods = {
             "P": P_s,
             "AP": AP_s,
@@ -444,16 +444,28 @@ class oll(_object):
     __del__ = lambda self : None;
     def save(self, *args): return _oll.oll_save(self, *args)
     def load(self, *args): return _oll.oll_load(self, *args)
-    def classify(self, fv):
-        tmp = FeatureVector()
-        for id, value in fv.items():
-            tmp.push_back(IntFloatPair(id, value))
-        return _oll.oll_classify(self, tmp)
+    def classify(self, fv_dict):
+        fv = FeatureVector()
+        for (_id, value) in fv_dict.items():
+            fv.push_back(IntFloatPair(_id, value))
+        return _oll.oll_classify(self, fv)
     def getMargin(self, *args): return _oll.oll_getMargin(self, *args)
     def getMarginK(self, *args): return _oll.oll_getMarginK(self, *args)
     def getVariance(self, *args): return _oll.oll_getVariance(self, *args)
     def getNorm(self, *args): return _oll.oll_getNorm(self, *args)
-    def testFile(self, *args): return _oll.oll_testFile(self, *args)
+    def testFile(self, testfile, verb):
+        conf_mat_vec = IntVector()
+        _oll.oll_testFile(self, testfile, conf_mat_vec, verb)
+        conf_mat_vec = [i for i in conf_mat_vec]
+        correct = conf_mat_vec[0] + conf_mat_vec[3]
+        total = sum(conf_mat_vec)
+        return {
+            'accuracy': correct * 100 / total,
+            'true-positive': conf_mat_vec[0],
+            'false-negative': conf_mat_vec[1],
+            'false-positive': conf_mat_vec[2],
+            'true-negative': conf_mat_vec[3]
+        }
     def parseLine(self, *args): return _oll.oll_parseLine(self, *args)
     def setC(self, *args): return _oll.oll_setC(self, *args)
     def setBias(self, *args): return _oll.oll_setBias(self, *args)
@@ -467,15 +479,14 @@ class oll(_object):
     def trainExamplePAK(self, *args): return _oll.oll_trainExamplePAK(self, *args)
     def trainExampleCW(self, *args): return _oll.oll_trainExampleCW(self, *args)
     def trainExampleAL(self, *args): return _oll.oll_trainExampleAL(self, *args)
-    def add(self, fv, y):
-        #raise ArgumentError if y != 1 && y != -1
-        tmp = FeatureVector()
-        for id, value in fv.items():
-            tmp.push_back(IntFloatPair(id, value))
-        self.train_method(self.method, tmp, y)
+    def add(self, fv_dict, y):
+        if y != 1 and y != -1:
+            raise ValueError('"y" should be 1 or -1')
+        fv = FeatureVector()
+        for (_id, value) in fv_dict.items():
+            fv.push_back(IntFloatPair(_id, value))
+        self.train_method(self.method, fv, y)
 oll_swigregister = _oll.oll_swigregister
 oll_swigregister(oll)
 
 # This file is compatible with both classic and new-style classes.
-
-

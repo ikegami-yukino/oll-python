@@ -15,7 +15,7 @@ class Test_oll(object):
         def _validate_methods(methods):
             for method in methods:
                 oll.oll(method)
-        methods = ('P','AP','PA','PA1','PA2','PAK','CW','AL')
+        methods = ('P', 'AP', 'PA', 'PA1', 'PA2', 'PAK', 'CW', 'AL')
         eq_(None, _validate_methods(methods))
 
     @raises(KeyError)
@@ -23,10 +23,9 @@ class Test_oll(object):
         def _validate_methods(methods):
             for method in methods:
                 oll.oll(method)
-        invalid_methods = ('AWP','PY', 0)
+        invalid_methods = ('AWP', 'PY', 0)
         _validate_methods(invalid_methods)
 
-    @raises(NotImplementedError)
     def test_add(self):
         self.oll.add({1.5: 1.0}, 1)
         self.oll.add({-1.5: 1.0}, -1)
@@ -35,7 +34,7 @@ class Test_oll(object):
         self.oll.add({10: 1.0}, -3)
 
     def test_classify(self):
-        eq_(0.171429, round(self.oll.classify({0:1.0, 1:1.0}), 6))
+        eq_(0.171429, round(self.oll.classify({0: 1.0, 1: 1.0}), 6))
 
     def test_save_and_load(self):
         try:
@@ -47,6 +46,32 @@ class Test_oll(object):
             self.test_classify()
         finally:
             os.remove(filename)
+
+    def test_testFile(self):
+        try:
+            self.oll = oll.oll('PA1')
+            self.oll.add({0: 1.0, 1: 1.0}, 1)
+            self.oll.add({2: -1.0, 3: -1.0}, -1)
+            model_filename = tempfile.mkstemp()[1]
+            self.oll.save(model_filename)
+
+            test_filename = tempfile.mkstemp()[1]
+            with open(test_filename, 'w') as fd:
+                fd.write('+1 0:1.0 1:1.0\n')
+                fd.write('-1 2:-1.0 3:-1.0\n')
+
+            actual = self.oll.testFile(test_filename, 0)
+            desired = {
+                'accuracy': 100.0,
+                'true-positive': 1,
+                'false-positive': 0,
+                'true-negative': 1,
+                'false-negative': 0
+            }
+            eq_(actual, desired)
+        finally:
+            os.remove(model_filename)
+            os.remove(test_filename)
 
     def test_setC(self):
         self.oll.setC(0.14)
