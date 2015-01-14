@@ -1,0 +1,20 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    import _oll
+    if fp is not None:
+    except NameError
+    return self.this.own()
+    return method(self)
+    strthis
+    return "<%s.%s; %s >"
+    except AttributeError
+    class _object
+    _newclass = 0
+    __del__ = lambda self: None
+    SwigPyIterator
+    IntVector
+    FloatVector
+    IntFloatPair
+    FeatureVector
+    swig
