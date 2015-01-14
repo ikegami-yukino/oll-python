@@ -92,56 +92,11 @@ class SwigPyIterator(_object):
     __swig_destroy__ = _oll.delete_SwigPyIterator
     __del__ = lambda self: None
 
-    def value(self):
-        return _oll.SwigPyIterator_value(self)
-
-    def incr(self, n=1):
-        return _oll.SwigPyIterator_incr(self, n)
-
-    def decr(self, n=1):
-        return _oll.SwigPyIterator_decr(self, n)
-
-    def distance(self, *args):
-        return _oll.SwigPyIterator_distance(self, *args)
-
-    def equal(self, *args):
-        return _oll.SwigPyIterator_equal(self, *args)
-
-    def copy(self):
-        return _oll.SwigPyIterator_copy(self)
-
-    def next(self):
-        return _oll.SwigPyIterator_next(self)
-
     def __next__(self):
         return _oll.SwigPyIterator___next__(self)
 
-    def previous(self):
-        return _oll.SwigPyIterator_previous(self)
-
-    def advance(self, *args):
-        return _oll.SwigPyIterator_advance(self, *args)
-
-    def __eq__(self, *args):
-        return _oll.SwigPyIterator___eq__(self, *args)
-
-    def __ne__(self, *args):
-        return _oll.SwigPyIterator___ne__(self, *args)
-
-    def __iadd__(self, *args):
-        return _oll.SwigPyIterator___iadd__(self, *args)
-
-    def __isub__(self, *args):
-        return _oll.SwigPyIterator___isub__(self, *args)
-
-    def __add__(self, *args):
-        return _oll.SwigPyIterator___add__(self, *args)
-
-    def __sub__(self, *args):
-        return _oll.SwigPyIterator___sub__(self, *args)
-
-    def __iter__(self):
-        return self
+    def next(self):
+        return _oll.SwigPyIterator_next(self)
 SwigPyIterator_swigregister = _oll.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
@@ -160,222 +115,16 @@ class IntVector(_object):
     def __iter__(self):
         return self.iterator()
 
-    def __nonzero__(self):
-        return _oll.IntVector___nonzero__(self)
-
-    def __bool__(self):
-        return _oll.IntVector___bool__(self)
-
-    def __len__(self):
-        return _oll.IntVector___len__(self)
-
-    def pop(self):
-        return _oll.IntVector_pop(self)
-
-    def __getslice__(self, *args):
-        return _oll.IntVector___getslice__(self, *args)
-
-    def __setslice__(self, *args):
-        return _oll.IntVector___setslice__(self, *args)
-
-    def __delslice__(self, *args):
-        return _oll.IntVector___delslice__(self, *args)
-
-    def __delitem__(self, *args):
-        return _oll.IntVector___delitem__(self, *args)
-
-    def __getitem__(self, *args):
-        return _oll.IntVector___getitem__(self, *args)
-
-    def __setitem__(self, *args):
-        return _oll.IntVector___setitem__(self, *args)
-
-    def append(self, *args):
-        return _oll.IntVector_append(self, *args)
-
-    def empty(self):
-        return _oll.IntVector_empty(self)
-
-    def size(self):
-        return _oll.IntVector_size(self)
-
-    def clear(self):
-        return _oll.IntVector_clear(self)
-
-    def swap(self, *args):
-        return _oll.IntVector_swap(self, *args)
-
-    def get_allocator(self):
-        return _oll.IntVector_get_allocator(self)
-
-    def begin(self):
-        return _oll.IntVector_begin(self)
-
-    def end(self):
-        return _oll.IntVector_end(self)
-
-    def rbegin(self):
-        return _oll.IntVector_rbegin(self)
-
-    def rend(self):
-        return _oll.IntVector_rend(self)
-
-    def pop_back(self):
-        return _oll.IntVector_pop_back(self)
-
-    def erase(self, *args):
-        return _oll.IntVector_erase(self, *args)
-
     def __init__(self, *args):
         this = _oll.new_IntVector(*args)
         try:
             self.this.append(this)
         except:
             self.this = this
-
-    def push_back(self, *args):
-        return _oll.IntVector_push_back(self, *args)
-
-    def front(self):
-        return _oll.IntVector_front(self)
-
-    def back(self):
-        return _oll.IntVector_back(self)
-
-    def assign(self, *args):
-        return _oll.IntVector_assign(self, *args)
-
-    def resize(self, *args):
-        return _oll.IntVector_resize(self, *args)
-
-    def insert(self, *args):
-        return _oll.IntVector_insert(self, *args)
-
-    def reserve(self, *args):
-        return _oll.IntVector_reserve(self, *args)
-
-    def capacity(self):
-        return _oll.IntVector_capacity(self)
     __swig_destroy__ = _oll.delete_IntVector
     __del__ = lambda self: None
 IntVector_swigregister = _oll.IntVector_swigregister
 IntVector_swigregister(IntVector)
-
-
-class FloatVector(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(
-        self, FloatVector, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, FloatVector, name)
-    __repr__ = _swig_repr
-
-    def iterator(self):
-        return _oll.FloatVector_iterator(self)
-
-    def __iter__(self):
-        return self.iterator()
-
-    def __nonzero__(self):
-        return _oll.FloatVector___nonzero__(self)
-
-    def __bool__(self):
-        return _oll.FloatVector___bool__(self)
-
-    def __len__(self):
-        return _oll.FloatVector___len__(self)
-
-    def pop(self):
-        return _oll.FloatVector_pop(self)
-
-    def __getslice__(self, *args):
-        return _oll.FloatVector___getslice__(self, *args)
-
-    def __setslice__(self, *args):
-        return _oll.FloatVector___setslice__(self, *args)
-
-    def __delslice__(self, *args):
-        return _oll.FloatVector___delslice__(self, *args)
-
-    def __delitem__(self, *args):
-        return _oll.FloatVector___delitem__(self, *args)
-
-    def __getitem__(self, *args):
-        return _oll.FloatVector___getitem__(self, *args)
-
-    def __setitem__(self, *args):
-        return _oll.FloatVector___setitem__(self, *args)
-
-    def append(self, *args):
-        return _oll.FloatVector_append(self, *args)
-
-    def empty(self):
-        return _oll.FloatVector_empty(self)
-
-    def size(self):
-        return _oll.FloatVector_size(self)
-
-    def clear(self):
-        return _oll.FloatVector_clear(self)
-
-    def swap(self, *args):
-        return _oll.FloatVector_swap(self, *args)
-
-    def get_allocator(self):
-        return _oll.FloatVector_get_allocator(self)
-
-    def begin(self):
-        return _oll.FloatVector_begin(self)
-
-    def end(self):
-        return _oll.FloatVector_end(self)
-
-    def rbegin(self):
-        return _oll.FloatVector_rbegin(self)
-
-    def rend(self):
-        return _oll.FloatVector_rend(self)
-
-    def pop_back(self):
-        return _oll.FloatVector_pop_back(self)
-
-    def erase(self, *args):
-        return _oll.FloatVector_erase(self, *args)
-
-    def __init__(self, *args):
-        this = _oll.new_FloatVector(*args)
-        try:
-            self.this.append(this)
-        except:
-            self.this = this
-
-    def push_back(self, *args):
-        return _oll.FloatVector_push_back(self, *args)
-
-    def front(self):
-        return _oll.FloatVector_front(self)
-
-    def back(self):
-        return _oll.FloatVector_back(self)
-
-    def assign(self, *args):
-        return _oll.FloatVector_assign(self, *args)
-
-    def resize(self, *args):
-        return _oll.FloatVector_resize(self, *args)
-
-    def insert(self, *args):
-        return _oll.FloatVector_insert(self, *args)
-
-    def reserve(self, *args):
-        return _oll.FloatVector_reserve(self, *args)
-
-    def capacity(self):
-        return _oll.FloatVector_capacity(self)
-    __swig_destroy__ = _oll.delete_FloatVector
-    __del__ = lambda self: None
-FloatVector_swigregister = _oll.FloatVector_swigregister
-FloatVector_swigregister(FloatVector)
 
 
 class IntFloatPair(_object):
@@ -434,77 +183,8 @@ class FeatureVector(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, FeatureVector, name)
     __repr__ = _swig_repr
 
-    def iterator(self):
-        return _oll.FeatureVector_iterator(self)
-
     def __iter__(self):
         return self.iterator()
-
-    def __nonzero__(self):
-        return _oll.FeatureVector___nonzero__(self)
-
-    def __bool__(self):
-        return _oll.FeatureVector___bool__(self)
-
-    def __len__(self):
-        return _oll.FeatureVector___len__(self)
-
-    def pop(self):
-        return _oll.FeatureVector_pop(self)
-
-    def __getslice__(self, *args):
-        return _oll.FeatureVector___getslice__(self, *args)
-
-    def __setslice__(self, *args):
-        return _oll.FeatureVector___setslice__(self, *args)
-
-    def __delslice__(self, *args):
-        return _oll.FeatureVector___delslice__(self, *args)
-
-    def __delitem__(self, *args):
-        return _oll.FeatureVector___delitem__(self, *args)
-
-    def __getitem__(self, *args):
-        return _oll.FeatureVector___getitem__(self, *args)
-
-    def __setitem__(self, *args):
-        return _oll.FeatureVector___setitem__(self, *args)
-
-    def append(self, *args):
-        return _oll.FeatureVector_append(self, *args)
-
-    def empty(self):
-        return _oll.FeatureVector_empty(self)
-
-    def size(self):
-        return _oll.FeatureVector_size(self)
-
-    def clear(self):
-        return _oll.FeatureVector_clear(self)
-
-    def swap(self, *args):
-        return _oll.FeatureVector_swap(self, *args)
-
-    def get_allocator(self):
-        return _oll.FeatureVector_get_allocator(self)
-
-    def begin(self):
-        return _oll.FeatureVector_begin(self)
-
-    def end(self):
-        return _oll.FeatureVector_end(self)
-
-    def rbegin(self):
-        return _oll.FeatureVector_rbegin(self)
-
-    def rend(self):
-        return _oll.FeatureVector_rend(self)
-
-    def pop_back(self):
-        return _oll.FeatureVector_pop_back(self)
-
-    def erase(self, *args):
-        return _oll.FeatureVector_erase(self, *args)
 
     def __init__(self, *args):
         this = _oll.new_FeatureVector(*args)
@@ -516,26 +196,6 @@ class FeatureVector(_object):
     def push_back(self, *args):
         return _oll.FeatureVector_push_back(self, *args)
 
-    def front(self):
-        return _oll.FeatureVector_front(self)
-
-    def back(self):
-        return _oll.FeatureVector_back(self)
-
-    def assign(self, *args):
-        return _oll.FeatureVector_assign(self, *args)
-
-    def resize(self, *args):
-        return _oll.FeatureVector_resize(self, *args)
-
-    def insert(self, *args):
-        return _oll.FeatureVector_insert(self, *args)
-
-    def reserve(self, *args):
-        return _oll.FeatureVector_reserve(self, *args)
-
-    def capacity(self):
-        return _oll.FeatureVector_capacity(self)
     __swig_destroy__ = _oll.delete_FeatureVector
     __del__ = lambda self: None
 FeatureVector_swigregister = _oll.FeatureVector_swigregister
