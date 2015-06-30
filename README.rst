@@ -48,20 +48,20 @@ License
 New BSD License.
 
 .. |travis| image:: https://travis-ci.org/ikegami-yukino/oll-python.svg?branch=master
-    :target: https://travis-ci.org/ikegami-yukino/madoka-python
+    :target: https://travis-ci.org/ikegami-yukino/oll-python
     :alt: travis-ci.org
 .. |coveralls| image:: https://coveralls.io/repos/ikegami-yukino/oll-python/badge.png
-    :target: https://coveralls.io/r/ikegami-yukino/madoka-python
+    :target: https://coveralls.io/r/ikegami-yukino/oll-python
     :alt: coveralls.io
 
 .. |downloads| image:: https://img.shields.io/pypi/dm/oll.svg
-    :target: http://pypi.python.org/pypi/madoka/
+    :target: http://pypi.python.org/pypi/oll/
     :alt: downloads
 
 .. |version| image:: https://img.shields.io/pypi/v/oll.svg
-    :target: http://pypi.python.org/pypi/madoka/
+    :target: http://pypi.python.org/pypi/oll/
     :alt: latest version
 
 .. |license| image:: https://img.shields.io/pypi/l/oll.svg
-    :target: http://pypi.python.org/pypi/madoka/
+    :target: http://pypi.python.org/pypi/oll/
     :alt: license
