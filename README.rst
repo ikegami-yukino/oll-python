@@ -1,13 +1,7 @@
 oll-python
 ==========
-.. image:: https://badge.fury.io/py/oll.png
-    :target: http://badge.fury.io/py/oll
-.. image:: https://travis-ci.org/ikegami-yukino/oll-python.svg?branch=master
-    :target: https://travis-ci.org/ikegami-yukino/oll-python
-.. image:: https://coveralls.io/repos/ikegami-yukino/oll-python/badge.png?branch=master
-    :target: https://coveralls.io/r/ikegami-yukino/oll-python?branch=master
 
-
+|travis| |coveralls| |downloads| |version| |license|
 
 This is a Python binding of the OLL library for machine learning.
 
@@ -53,3 +47,21 @@ License
 -------
 New BSD License.
 
+.. |travis| image:: https://travis-ci.org/ikegami-yukino/oll-python.svg?branch=master
+    :target: https://travis-ci.org/ikegami-yukino/madoka-python
+    :alt: travis-ci.org
+.. |coveralls| image:: https://coveralls.io/repos/ikegami-yukino/oll-python/badge.png
+    :target: https://coveralls.io/r/ikegami-yukino/madoka-python
+    :alt: coveralls.io
+
+.. |downloads| image:: https://img.shields.io/pypi/dm/oll.svg
+    :target: http://pypi.python.org/pypi/madoka/
+    :alt: downloads
+
+.. |version| image:: https://img.shields.io/pypi/v/oll.svg
+    :target: http://pypi.python.org/pypi/madoka/
+    :alt: latest version
+
+.. |license| image:: https://img.shields.io/pypi/l/oll.svg
+    :target: http://pypi.python.org/pypi/madoka/
+    :alt: license
