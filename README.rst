@@ -27,14 +27,14 @@ OLL library is bundled, so you don't need to install it separately.
 Usage
 -----
 
-::
+.. code:: python
 
- >>> import oll
- >>> o = oll.oll("CW")
- >>> o.add({0: 1.0, 1: 2.0, 2: -1.0}, 1)  # train
- >>> o.classify({0:1.0, 1:1.0})  # predict
- >>> o.save('oll.model')
- >>> o.load('oll.model')
+ import oll
+ o = oll.oll("CW")
+ o.add({0: 1.0, 1: 2.0, 2: -1.0}, 1)  # train
+ o.classify({0:1.0, 1:1.0})  # predict
+ o.save('oll.model')
+ o.load('oll.model')
 
 
 Note
