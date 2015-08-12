@@ -192,7 +192,6 @@ namespace oll_tool{
   template <>
   void oll::trainExample(const P_s& a, const fv_t& fv, const int y) {
     const float score = getMargin(w, b, fv) * y;
-    printf("score:%f\n", score);
     if (score <= 0.f){
       update(w, fv, y);
     }
