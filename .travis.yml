@@ -17,7 +17,7 @@ before_install:
 # Install packages
 install:
   - conda install --yes python=$TRAVIS_PYTHON_VERSION numpy scipy nose
-  - conda install --yes -c dan_blanchard python-coveralls nose-cov
+  - pip install coveralls nose-cov
   - python setup.py install
 
 # Run test
