@@ -507,6 +507,53 @@ class oll(_object):
             fv.push_back(IntFloatPair(_id, value))
         self.train_method(fv, y)
 
+    def _array_to_feature_vector(self, x):
+        fv = FeatureVector()
+        if hasattr(x, 'indices'):  # for sparse matrix
+            indices = x.indices.astype('int')
+            values = x.data
+        else:
+            nonzero = x.nonzero()
+            indices = nonzero[0]
+            values = x[nonzero]
+        for (_id, value) in zip(indices, values):
+            fv.push_back(IntFloatPair(_id, value))
+        return fv
+
+    def fit(self, X, y):
+        """
+        train examples from numpy/scipy array
+
+        Args
+        X : numpy.ndarray or scipy.sparse matrix,
+            shape = (n_samples, self.n_features)
+        y : iterable
+        """
+        X = X.astype('float')
+        assert set(y) == set([1, -1])
+        for i in range(X.shape[0]):
+            fv = self._array_to_feature_vector(X[i])
+            self.train_method(fv, y[i])
+
+    def predict(self, X):
+        """
+        predict examples from numpy/scipy array
+
+        Args
+        X : numpy.ndarray or scipy.sparse matrix,
+            shape = (n_samples, self.n_features)
+        Return
+        labels : list (it takes 1 or -1)
+        """
+        X = X.astype('float')
+        labels = []
+        for i in range(X.shape[0]):
+            fv = self._array_to_feature_vector(X[i])
+            score = _oll.oll_classify(self, fv)
+            labels.append(1 if score > 0 else -1)
+        return labels
+
+
 oll_swigregister = _oll.oll_swigregister
 oll_swigregister(oll)
 

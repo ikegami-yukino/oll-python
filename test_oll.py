@@ -2,6 +2,8 @@
 import os
 import tempfile
 from nose.tools import ok_, eq_, assert_raises, assert_almost_equals
+import numpy as np
+from scipy.sparse import csr_matrix
 import oll
 
 
@@ -75,3 +77,26 @@ class Test_oll(object):
 
     def test_setBias(self):
         self.oll.setBias(0.14)
+
+    def test_fit(self):
+        np_array = np.array([[1.0, 2.0, -1.0], [-0.5, 1.0, -0.5]])
+        y = [1, -1]
+        self.oll.fit(np_array, y)
+        assert_almost_equals(self.oll.classify({0: 1.0, 1: 1.0}), 0.171429, 6)
+
+        self.oll = oll.oll('PA1')
+        sparse_matrix = csr_matrix(np.array([[1.0, 2.0, -1.0],
+                                             [-0.5, 1.0, -0.5]]))
+        self.oll.fit(sparse_matrix, y)
+        assert_almost_equals(self.oll.classify({0: 1.0, 1: 1.0}), 0.171429, 6)
+
+        assert_raises(AssertionError, self.oll.fit, np_array, [1, 2])
+
+    def test_predict(self):
+        self.oll.add({0: 1.0, 1: 2.0, 2: -1.0}, 1)
+        self.oll.add({0: -0.5, 1: 1.0, 2: -0.5}, -1)
+        np_array = np.array([[1.0, 1.0]])
+        eq_(self.oll.predict(np_array), [1])
+
+        sparse_matrix = csr_matrix([[1.0, 1.0]])
+        eq_(self.oll.predict(sparse_matrix), [1])
