@@ -22,11 +22,11 @@ install:
 
 # Run test
 script:
-  - nosetests --with-coverage --cover-package=oll --cov-config .coveragerc
+  - nosetests --with-coverage --cover-package=oll
 
 # Calculate coverage
 after_success:
-  - coveralls --config_file .coveragerc
+  - coveralls
 
 notifications:
   email:
