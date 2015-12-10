@@ -510,12 +510,12 @@ class oll(_object):
     def _array_to_feature_vector(self, x):
         fv = FeatureVector()
         if hasattr(x, 'indices'):  # for sparse matrix
-            indices = x.indices.astype('int')
-            values = x.data
+            indices = map(int, x.indices)
+            values = map(float, x.data)
         else:
             nonzero = x.nonzero()
-            indices = nonzero[0]
-            values = x[nonzero]
+            indices = map(int, nonzero[0])
+            values = map(float, x[nonzero])
         for (_id, value) in zip(indices, values):
             fv.push_back(IntFloatPair(_id, value))
         return fv
@@ -529,7 +529,7 @@ class oll(_object):
             shape = (n_samples, self.n_features)
         y : iterable
         """
-        X = X.astype('float')
+        X = X.astype('float32')
         assert set(y) == set([1, -1])
         for i in range(X.shape[0]):
             fv = self._array_to_feature_vector(X[i])
@@ -545,7 +545,7 @@ class oll(_object):
         Return
         labels : list (it takes 1 or -1)
         """
-        X = X.astype('float')
+        X = X.astype('float32')
         labels = []
         for i in range(X.shape[0]):
             fv = self._array_to_feature_vector(X[i])
