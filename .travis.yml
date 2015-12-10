@@ -6,11 +6,21 @@ python:
   - "3.4"
   - "3.5"
 install:
-  - "python setup.py install"
-  - "pip install coveralls"
-  - "pip install cython"
-  - "pip install numpy"
-  - "pip install scipy"
+  - python setup.py install
+  - pip install coveralls
+  - pip install --install-option="--no-cython-compile" cython
+  - pip install numpy
+  - pip install scipy
+addons:
+  apt:
+    packages:
+    - libatlas-dev
+    - libatlas-base-dev
+    - liblapack-dev
+    - gfortran
+    - libgmp-dev
+    - libmpfr-dev
+    - ccache
 script:
   - "nosetests --with-coverage --cover-package=oll"
 after_success:
