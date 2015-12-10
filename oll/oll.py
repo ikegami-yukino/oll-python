@@ -529,11 +529,10 @@ class oll(_object):
             shape = (n_samples, self.n_features)
         y : iterable
         """
-        X = X.astype('float32')
         assert set(y) == set([1, -1])
-        for i in range(X.shape[0]):
+        for (i, y_i) in enumerate(map(int, y)):
             fv = self._array_to_feature_vector(X[i])
-            self.train_method(fv, y[i])
+            self.train_method(fv, y_i)
 
     def predict(self, X):
         """

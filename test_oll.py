@@ -85,10 +85,12 @@ class Test_oll(object):
         assert_almost_equals(self.oll.classify({0: 1.0, 1: 1.0}), 0.171429, 6)
 
         self.oll = oll.oll('PA1')
-        sparse_matrix = csr_matrix(np.array([[1.0, 2.0, -1.0],
-                                             [-0.5, 1.0, -0.5]]))
+        sparse_matrix = csr_matrix([[1.0, 2.0, -1.0], [-0.5, 1.0, -0.5]])
         self.oll.fit(sparse_matrix, y)
         assert_almost_equals(self.oll.classify({0: 1.0, 1: 1.0}), 0.171429, 6)
+
+        self.oll = oll.oll('PA1')
+        self.oll.fit(sparse_matrix, np.array([1, -1]))
 
         assert_raises(AssertionError, self.oll.fit, np_array, [1, 2])
 
