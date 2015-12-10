@@ -3,7 +3,7 @@
 #
 # Do not make changes to this file unless you know what you are doing--modify
 # the SWIG interface file instead.
-
+import functools
 
 from sys import version_info
 if version_info >= (2, 6, 0):
@@ -379,18 +379,30 @@ class oll(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, oll, name)
     __repr__ = _swig_repr
 
-    def __init__(self, method):
+    def __init__(self, algorithm="P", C=1.0, b=0.0):
         """
-        Arg:
-            <str> method: learning method
+        following algorithms are available:
+            P: Perceptron,
+            AP: Averaged Perceptron,
+            PA: Passive Agressive,
+            PA1: Passive Agressive-I,
+            PA2: Passive Agressive-II,
+            PAK: Kernelized Passive Agressive,
+            CW: Confidence Weighted Linear-Classification,
+            AL: ALMA
+
+        Args:
+            <str> algorithm: learning algorithm (Default Perceptron)
+            <float> C: Regularization Paramter (Default 1.0)
+            <float> b: Bias (Default 0.0)
         """
         this = _oll.new_oll()
         try:
             self.this.append(this)
         except:
             self.this = this
-        assert isinstance(method, str)
-        methods = {
+        assert isinstance(algorithm, str)
+        algorithms = {
             "P": P_s,
             "AP": AP_s,
             "PA": PA_s,
@@ -410,35 +422,40 @@ class oll(_object):
             "CW": lambda *args: _oll.oll_trainExampleCW(self, *args),
             "AL": lambda *args: _oll.oll_trainExampleAL(self, *args)
         }
-        self.method = methods[method.upper()]()
-        self.train_method = train_methods[method]
+        self.train_method = functools.partial(train_methods[algorithm],
+                                              algorithms[algorithm.upper()]())
+        self.setC(C)
+        self.setBias(b)
 
     __swig_destroy__ = _oll.delete_oll
     __del__ = lambda self: None
 
-    def save(self, *args):
+    def save(self, filename):
         """
         Arg:
             <str> filename
         """
-        return _oll.oll_save(self, *args)
+        return _oll.oll_save(self, filename)
 
-    def load(self, *args):
+    def load(self, filename):
         """
         Arg:
             <str> filename
         """
-        return _oll.oll_load(self, *args)
+        return _oll.oll_load(self, filename)
 
-    def classify(self, fv_dict):
+    def classify(self, example):
         """
+        >>> classify({0: 0.5, 20: 0.3})
+        0.4
+
         Arg:
-            <dict <int>, <float>> fv_dict: feature vector
+            <dict <int>, <float>> example: feature vector
         Return:
             <float> result
         """
         fv = FeatureVector()
-        for (_id, value) in fv_dict.items():
+        for (_id, value) in example.items():
             fv.push_back(IntFloatPair(_id, value))
         return _oll.oll_classify(self, fv)
 
@@ -463,32 +480,32 @@ class oll(_object):
             'true-negative': conf_mat_vec[3]
         }
 
-    def setC(self, *args):
+    def setC(self, C):
         """
         Arg:
             <float> C
         """
-        return _oll.oll_setC(self, *args)
+        return _oll.oll_setC(self, C)
 
-    def setBias(self, *args):
+    def setBias(self, bias):
         """
         Arg:
             <float> bias
         """
-        return _oll.oll_setBias(self, *args)
+        return _oll.oll_setBias(self, bias)
 
-    def add(self, fv_dict, y):
+    def add(self, example, y):
         """
         Args:
-            <dict <int>, <float>> fv_dict: feature vector
+            <dict <int>, <float>> example: feature vector
             <float> y
         """
         if y != 1 and y != -1:
             raise ValueError('y is not +1 nor -1')
         fv = FeatureVector()
-        for (_id, value) in fv_dict.items():
+        for (_id, value) in example.items():
             fv.push_back(IntFloatPair(_id, value))
-        self.train_method(self.method, fv, y)
+        self.train_method(fv, y)
 
 oll_swigregister = _oll.oll_swigregister
 oll_swigregister(oll)
