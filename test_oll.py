@@ -16,7 +16,7 @@ class Test_oll(object):
 
     def test_invalid__init__(self):
         for method_name in ('AWP', 'PY'):
-            assert_raises(KeyError, oll.oll, method_name)
+            assert_raises(ValueError, oll.oll, method_name)
         assert_raises(AssertionError, oll.oll, 0)
 
     def test_add(self):
