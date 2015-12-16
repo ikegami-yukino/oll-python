@@ -9,7 +9,7 @@ Currently, OLL 0.03 supports following algorithms:
 
 - Perceptron
 - Averaged Perceptron
-- Passive Agressive (PA, PA-I, PA-II)
+- Passive Agressive (PA, PA-I, PA-II, Kernelized)
 - ALMA (modified slightly from original)
 - Confidence Weighted Linear-Classification.
 
