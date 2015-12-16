@@ -422,6 +422,11 @@ class oll(_object):
             "CW": lambda *args: _oll.oll_trainExampleCW(self, *args),
             "AL": lambda *args: _oll.oll_trainExampleAL(self, *args)
         }
+
+        if algorithm not in algorithms:
+            raise ValueError('Unsupported learning algorithm: {0}\n{1}'.format(
+                algorithm, oll.__init__.__doc__))
+
         self.train_method = functools.partial(train_methods[algorithm],
                                               algorithms[algorithm.upper()]())
         self.setC(C)
