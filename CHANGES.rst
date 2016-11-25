@@ -2,6 +2,14 @@
 CHANGES
 =======
 
+0.2 (2016-11-26)
+-------------------
+
+- scikit-learn like fit/predict interfaces are available
+- Setting C and bias parameters is available in initialization
+- Support Python 3.5
+- Unsupport Python 2.6 and 3.3
+
 0.1.2 (2015-01-11)
 -------------------
 
