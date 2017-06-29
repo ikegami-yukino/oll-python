@@ -57,6 +57,52 @@ Usage
  o.predict(matrix)
  # => [1, -1]
 
+ # Multi label classification
+ import time
+ import oll
+ from sklearn.multiclass import OutputCodeClassifier
+ from sklearn import datasets, cross_validation, metrics
+
+
+ dataset = datasets.load_digits()
+ ALGORITHMS = ("P", "AP", "PA", "PA1", "PA2", "PAK", "CW", "AL")
+ for algorithm in ALGORITHMS:
+     print(algorithm)
+     occ_predicts = []
+     expected = []
+     start = time.time()
+     for (train_idx, test_idx) in cross_validation.StratifiedKFold(dataset.target,
+                                                                   n_folds=10, shuffle=True):
+         clf = OutputCodeClassifier(oll.oll(algorithm))
+         clf.fit(dataset.data[train_idx], dataset.target[train_idx])
+         occ_predicts += list(clf.predict(dataset.data[test_idx]))
+         expected += list(dataset.target[test_idx])
+     print('Elapsed time: %s' % (time.time() - start))
+     print('Accuracy', metrics.accuracy_score(expected, occ_predicts))
+ # => P
+ # => Elapsed time: 109.82188701629639
+ # => Accuracy 0.770172509738
+ # => AP
+ # => Elapsed time: 111.42936396598816
+ # => Accuracy 0.760155815248
+ # => PA
+ # => Elapsed time: 110.95964503288269
+ # => Accuracy 0.74735670562
+ # => PA1
+ # => Elapsed time: 111.39844799041748
+ # => Accuracy 0.806343906511
+ # => PA2
+ # => Elapsed time: 115.12716913223267
+ # => Accuracy 0.766277128548
+ # => PAK
+ # => Elapsed time: 119.53838682174683
+ # => Accuracy 0.77796327212
+ # => CW
+ # => Elapsed time: 121.20785689353943
+ # => Accuracy 0.771285475793
+ # => AL
+ # => Elapsed time: 116.52497220039368
+ # => Accuracy 0.785754034502
 
 Note
 ----

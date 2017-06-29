@@ -379,7 +379,10 @@ class oll(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, oll, name)
     __repr__ = _swig_repr
 
-    def __init__(self, algorithm="P", C=1.0, b=0.0):
+    C = 1.0
+    bias = 0.0
+
+    def __init__(self, algorithm="P", C=1.0, bias=0.0):
         """
         following algorithms are available:
             P: Perceptron,
@@ -394,7 +397,7 @@ class oll(_object):
         Args:
             <str> algorithm: learning algorithm (Default Perceptron)
             <float> C: Regularization Paramter (Default 1.0)
-            <float> b: Bias (Default 0.0)
+            <float> bias: Bias (Default 0.0)
         """
         this = _oll.new_oll()
         try:
@@ -424,11 +427,25 @@ class oll(_object):
         }
         self.train_method = functools.partial(train_methods[algorithm],
                                               algorithms[algorithm.upper()]())
+        self.algorithm = algorithm
         self.setC(C)
-        self.setBias(b)
+        self.C = C
+        self.setBias(bias)
+        self.bias = bias
 
     __swig_destroy__ = _oll.delete_oll
     __del__ = lambda self: None
+
+    def get_params(self, **kwargs):
+        return {'C': self.C, 'bias': self.bias}
+
+    def set_params(self, C=None, bias=None):
+        if C:
+            self.setC(C)
+            self.C = C
+        if bias:
+            self.setBias(bias)
+            self.bias = bias
 
     def save(self, filename):
         """
@@ -485,6 +502,7 @@ class oll(_object):
         Arg:
             <float> C
         """
+        self.C = C
         return _oll.oll_setC(self, C)
 
     def setBias(self, bias):
@@ -492,6 +510,7 @@ class oll(_object):
         Arg:
             <float> bias
         """
+        self.bias = bias
         return _oll.oll_setBias(self, bias)
 
     def add(self, example, y):
@@ -529,10 +548,27 @@ class oll(_object):
             shape = (n_samples, self.n_features)
         y : iterable
         """
-        assert set(y) == set([1, -1])
+        assert all(_y in (1, -1) for _y in y)
         for (i, y_i) in enumerate(map(int, y)):
             fv = self._array_to_feature_vector(X[i])
             self.train_method(fv, y_i)
+        return self
+
+    def decision_function(self, X):
+        """
+        predict examples from numpy/scipy array
+
+        Args
+        X : numpy.ndarray or scipy.sparse matrix,
+            shape = (n_samples, self.n_features)
+        Return
+        scores : list of float
+        """
+        scores = []
+        for i in range(X.shape[0]):
+            fv = self._array_to_feature_vector(X[i])
+            scores.append(_oll.oll_classify(self, fv))
+        return scores
 
     def predict(self, X):
         """
