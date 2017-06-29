@@ -1,7 +1,7 @@
 oll-python
 ==========
 
-|travis| |coveralls| |downloads| |version| |license|
+|travis| |coveralls| |version| |license|
 
 This is a Python binding of the OLL library for machine learning.
 
@@ -120,10 +120,6 @@ New BSD License.
 .. |coveralls| image:: https://coveralls.io/repos/ikegami-yukino/oll-python/badge.png
     :target: https://coveralls.io/r/ikegami-yukino/oll-python
     :alt: coveralls.io
-
-.. |downloads| image:: https://img.shields.io/pypi/dm/oll.svg
-    :target: http://pypi.python.org/pypi/oll/
-    :alt: downloads
 
 .. |version| image:: https://img.shields.io/pypi/v/oll.svg
     :target: http://pypi.python.org/pypi/oll/
