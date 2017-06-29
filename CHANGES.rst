@@ -2,6 +2,12 @@
 CHANGES
 =======
 
+0.2.1 (2017-6-30)
+-------------------
+
+- Multi label clasification (using scikit-learn)
+- Support Python 3.6
+
 0.2 (2016-11-26)
 -------------------
 

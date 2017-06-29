@@ -78,6 +78,22 @@ class Test_oll(object):
     def test_setBias(self):
         self.oll.setBias(0.14)
 
+    def test_set_params(self):
+        self.oll.set_params(C=0.14, bias=0.14)
+        eq_(self.oll.get_params(), {'C': 0.14, 'bias': 0.14})
+
+    def test_get_params(self):
+        self.oll.set_params(C=0.14, bias=0.14)
+        eq_(self.oll.get_params(), {'C': 0.14, 'bias': 0.14})
+
+    def test_decision_function(self):
+        np_array = np.array([[1.0, 2.0, -1.0], [-0.5, 1.0, -0.5]])
+        y = [1, -1]
+        self.oll.fit(np_array, y)
+        print(self.oll.decision_function(np_array))
+        assert_almost_equals(self.oll.decision_function(np_array),
+                [-0.17142848670482635, -0.48571422696113586], 6) 
+
     def test_fit(self):
         np_array = np.array([[1.0, 2.0, -1.0], [-0.5, 1.0, -0.5]])
         y = [1, -1]
@@ -92,7 +108,7 @@ class Test_oll(object):
         self.oll = oll.oll('PA1')
         self.oll.fit(sparse_matrix, np.array([1, -1]))
 
-        assert_raises(AssertionError, self.oll.fit, np_array, [1, 2])
+        assert_raises(AssertionError, self.oll.fit, np_array, [1, 0])
 
     def test_predict(self):
         self.oll.add({0: 1.0, 1: 2.0, 2: -1.0}, 1)
